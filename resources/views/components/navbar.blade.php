@@ -1,14 +1,24 @@
 <!-- Alpine Component -->
 <div x-data="{ open: false }">
-    <nav class="bg-blue-800 px-4 py-1">
+    <nav 
+        class="
+            px-4 py-1 
+            {{ request()->routeIs('products.*') ? 'bg-blue-600' : '' }} 
+            {{ request()->routeIs('categories.*') ? 'bg-orange-600' : '' }}
+        "
+    >
         <div class="mx-auto max-w-7xl px-2 sm:p-6 lg:px-8">
+            <!-- Mobile menu toggle button -->
             <div class="relative flex h-16 justify-between sm:hidden">
                 <div class="flex shrink-0 items-center">
                     <a href="#"><h1 class="text-2xl font-bold text-white">Voorraad Manager</h1></a>
                 </div>
 
                 <!-- Toggle button with Alpine -->
-                <button @click="open = !open" class="relative inline-flex items-center justify-center rounded-md p-2 text-blue-400 hover:bg-blue-700 hover:text-white focus:ring-2 focus:ring-white">
+                <button @click="open = !open" 
+                        class="relative inline-flex items-center justify-center rounded-md p-2 text-white cursor-pointer 
+                               hover:text-white focus:ring-2 focus:ring-white"
+                >
                     <span class="sr-only">Open main menu</span>
 
                     <!-- Open icon -->
@@ -24,11 +34,38 @@
             </div>
 
             <!-- Mobile menu -->
-            <div x-show="open" x-transition x-cloak class="sm:hidden px-4 py-2 bg-blue-700 text-white rounded my-2">
-                <a href="#" class="block py-2 hover:bg-blue-600 rounded px-2">Home</a>
-                <a href="#" class="block py-2 hover:bg-blue-600 rounded px-2">Gebruikers</a>
-                <a href="#" class="block py-2 hover:bg-blue-600 rounded px-2">Projects</a>
-                <a href="#" class="block py-2 hover:bg-blue-600 rounded px-2">Meldingen</a>
+            <div x-show="open" x-transition x-cloak 
+                 class="
+                    sm:hidden px-4 py-2 rounded my-2 
+                    {{ request()->routeIs('products.*') ? 'bg-blue-700' : '' }}
+                    {{ request()->routeIs('categories.*') ? 'bg-orange-700' : '' }}
+                 "
+            >
+                <a href="#" 
+                   class="block py-2 rounded px-2 text-white 
+                          {{ request()->routeIs('products.*') ? 'hover:bg-blue-600' : 'hover:bg-orange-600' }}"
+                >Home</a>
+
+                <a href="{{ route('products.index') }}" 
+                   class="block py-2 px-2 rounded text-white
+                          {{ request()->routeIs('products.*') ? 'bg-blue-900' : '' }} 
+                          {{ request()->routeIs('categories.*') ? 'hover:bg-orange-600' : 'hover:bg-blue-600' }}"
+                >
+                    Product overview
+                </a>
+
+                <a href="{{ route('categories.index') }}" 
+                   class="block py-2 px-2 rounded text-white
+                          {{ request()->routeIs('categories.*') ? 'bg-orange-900' : '' }}
+                          {{ request()->routeIs('categories.*') ? 'hover:bg-orange-600' : 'hover:bg-blue-600' }}"
+                >
+                    Categories overview
+                </a>
+
+                <a href="#" 
+                   class="block py-2 rounded px-2 text-white 
+                          {{ request()->routeIs('products.*') ? 'hover:bg-blue-600' : 'hover:bg-orange-600' }}"
+                >Users</a>
             </div>
 
             <!-- Desktop menu -->
@@ -38,10 +75,31 @@
                 </div>
                 <div class="hidden sm:ml-6 sm:block">
                     <div class="flex space-x-4">
-                        <a href="#" class="rounded-md bg-blue-900 px-3 py-2 text-sm font-medium text-white">Home</a>
-                        <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-blue-300 hover:bg-blue-700 hover:text-white">Gebruikers</a>
-                        <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-blue-300 hover:bg-blue-700 hover:text-white">Projects</a>
-                        <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-blue-300 hover:bg-blue-700 hover:text-white">Meldingen</a>
+                        <a href="#" 
+                           class="rounded-md px-3 py-2 text-sm font-medium text-white 
+                                  {{ request()->routeIs('products.*') ? 'hover:bg-blue-700' : 'hover:bg-orange-700' }}"
+                        >Home</a>
+
+                        <a href="{{ route('products.index') }}" 
+                           class="rounded-md px-3 py-2 text-sm font-medium text-white
+                                  {{ request()->routeIs('products.*') ? 'bg-blue-900' : '' }}
+                                  {{ request()->routeIs('categories.*') ? 'hover:bg-orange-700' : 'hover:bg-blue-700' }}"
+                        >
+                            Product overview
+                        </a>
+
+                        <a href="{{ route('categories.index') }}" 
+                           class="rounded-md px-3 py-2 text-sm font-medium text-white
+                                  {{ request()->routeIs('categories.*') ? 'bg-orange-900' : '' }}
+                                  {{ request()->routeIs('categories.*') ? 'hover:bg-orange-700' : 'hover:bg-blue-700' }}"
+                        >
+                            Categories overview
+                        </a>
+
+                        <a href="#" 
+                           class="rounded-md px-3 py-2 text-sm font-medium text-white
+                                  {{ request()->routeIs('products.*') ? 'hover:bg-blue-700' : 'hover:bg-orange-700' }}"
+                        >Users</a>
                     </div>
                 </div>
             </div>

@@ -22,7 +22,7 @@
 
         <div class="container mx-auto my-4">
             <div class="flex justify-between items-center">
-                <h1 class="text-3xl font-bold">Products</h1>
+                <h1 class="text-3xl font-bold text-blue-500">Products</h1>
                 <button onclick="document.getElementById('productModal').classList.remove('hidden')" class="bg-blue-600 rounded p-2 my-2 text-white hover:bg-blue-700 transition font-bold cursor-pointer">Add a product +</button>
             </div>
 
