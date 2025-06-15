@@ -22,7 +22,7 @@
 
         <div class="container mx-auto my-4">
             <div class="flex justify-between items-center">
-                <h1 class="text-3xl font-bold text-blue-500">Products</h1>
+                <h1 class="text-3xl font-bold">Products</h1>
                 <button onclick="document.getElementById('productModal').classList.remove('hidden')" class="bg-blue-600 rounded p-2 my-2 text-white hover:bg-blue-700 transition font-bold cursor-pointer">Add a product +</button>
             </div>
 
@@ -44,7 +44,15 @@
                                 <td class="px-4 py-2">{{ $product->Product_Name }}</td>
                                 <td class="px-4 py-2">{{ $product->Product_Quantity }}</td>
                                 <td class="px-4 py-2">{{ $product->Category ? $product->Category->Category_Name : 'N/A' }}</td>
-                                
+                                <td class="px-4 py-2 flex space-x-2">
+                                    <a href="{{ route('products.edit', $product->id) }}" class="bg-blue-600 rounded p-2 my-2 text-white hover:bg-blue-700 transition font-bold cursor-pointer">Edit</a>
+                                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="bg-red-600 rounded p-2 my-2 text-white hover:bg-red-700 transition font-bold cursor-pointer">Delete</button>
+                                    </form>
+                                    <a href="{{ route('products.info', $product->id) }}" class="bg-green-600 rounded p-2 my-2 text-white hover:bg-green-700 transition font-bold cursor-pointer">Info</a>
+                                </td>
                             </tr>
                         @endforeach
                 </table>
@@ -81,7 +89,7 @@
                         <select id="productCategory" name="Category_ID" class="w-full border border-gray-300 rounded p-2 mt-1">
                             <option value="1">Default</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->Category_ID }}">{{ $category->Category_Name }}</option>
+                                <option value='{{ $category->id }}'>{{ $category->Category_Name }}</option>
                             @endforeach
                         </select>
                     </div>

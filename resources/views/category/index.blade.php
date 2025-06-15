@@ -23,7 +23,7 @@
         <div class="container mx-auto py-4">
             <div class="flex justify-between items-center mb-4">
                 <h1 class="text-3xl font-bold text-orange-600">Categories overview</h1>
-                <button class="bg-orange-600 rounded p-2 my-2 text-white hover:bg-orange-700 transition font-bold cursor-pointer">Add a category+</button>
+                <a href="{{ route('categories.create') }}" class="bg-orange-600 rounded p-2 my-2 text-white hover:bg-orange-700 transition font-bold cursor-pointer">Add a category+</a>
             </div>
 
             <div class="overflow-x-auto bg-white shadow-md rounded my-3">
@@ -52,9 +52,10 @@
                             </tr>
                         @endforeach
                     </tbody>
-
                 </table>
             </div>
+
+            
 
         </div>
     </body>
